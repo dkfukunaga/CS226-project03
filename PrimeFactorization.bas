@@ -31,6 +31,7 @@
 1001 REM calculates all the prime factors of N, including multiples
 1002 REM returns array of factors AF(), length of array LF
 1010 MF = INT(LOG(N)/LOG(2)) : REM max number of prime factors (with multiplicity)
+1020 DIM AF(MF) : REM allocate array of factors
 1030 MP = FN ISQR(N) : IF MP < 2 THEN MP = 2 : REM calc largest possible factor
 1040 GOSUB 2000 : REM GetPrimes(MP) -> PR(MP), LP
 1100 CN = N
