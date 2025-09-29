@@ -18,7 +18,7 @@
 100 PRINT "Enter a positive integer or Q to quit"
 120 INPUT ">> "; IN$
 130 IF IN$ = "Q" GOTO 6000
-140 N = VAL(IN$) : IF N < 1 THEN GOSUB 5500 : GOTO 90 : REM error message
+140 N = INT(VAL(IN$)) : IF N < 1 THEN GOSUB 5500 : GOTO 90 : REM error message
 141 REM note: VAL(IN$) will return 0 for a non-numeric string
 150 IF N = 1 THEN PRINT "1 is neither prime nor composite." : GOSUB 5600 : GOTO 90 : REM pause
 160 GOSUB 1000 : REM GetFactors(N) -> AF(), LF
