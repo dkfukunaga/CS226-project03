@@ -22,7 +22,7 @@
 141 REM note: VAL(IN$) will return 0 for a non-numeric string
 150 IF N = 1 THEN PRINT "1 is neither prime nor composite." : GOSUB 5600 : GOTO 90 : REM pause
 160 GOSUB 1000 : REM GetFactors(N) -> AF(), LF
-165 REM PRINT "Primes ("; LP; "): "; : FOR I = 0 TO LP - 1 : PRINT PR(I); " "; : NEXT I : PRINT : REM debugging
+165 REM PRINT "Primes up to "; MP; " ("; LP; "):" : FOR I = 0 TO LP - 1 : PRINT PR(I); " "; : NEXT I : PRINT : REM debugging
 170 IF LF = 1 THEN PRINT N; " IS PRIME!" : GOSUB 5600 : GOTO 50 : REM pause
 180 PRINT N; " = "; AF(0);
 190 FOR I = 1 TO LF-1 : PRINT " * "; AF(I); : NEXT I : PRINT
