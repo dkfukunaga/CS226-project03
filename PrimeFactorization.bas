@@ -62,7 +62,7 @@
 2080 IF S(J) <> 0 THEN LP = LP - 1 : S(J) = 0
 2090 NEXT J : REM end of the sieve
 2100 NEXT P : REM continue iterating through the sieve
-2105 DIM PR(LP)
+2105 DIM PR(LP-1)
 2110 CP = 0 : REM count primes (LP)
 2120 FOR I = 2 TO MP : REM loop through sieve to create array of primes
 2130 IF S(I) THEN PR(CP) = I : CP = CP + 1 : IF CP >= LP THEN GOTO 2150
