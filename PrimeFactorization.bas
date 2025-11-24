@@ -51,7 +51,7 @@
 2000 REM GetPrimes(MP) -> PR(MP), LP
 2001 REM calculates prime numbers up to MP using the Sieve of Eratosthenes
 2002 REM returns array PR of prime numbers, length of array LP
-2010 DIM S(MP) : LP = MP - 1 : REM boolean sieve S(), and prime list PR()
+2010 DIM S(MP) : LP = MP - 1 : REM boolean sieve S(), initialize length of primes LP to MP - 1
 2020 FOR I = 0 TO MP : S(I) = -1 : NEXT I  : REM -1 TRUE (I is prime), 0 FALSE (I is composite)
 2030 S(0) = 0 : S(1) = 0 : REM 0 and 1 are never prime
 2035 LMT = FN ISQR(MP) : REM sieve only needs to go through the square root of MP
@@ -59,11 +59,10 @@
 2050 IF S(P) = 0 GOTO 2100 : REM skip numbers already removed
 2062 K = P*P : IF K > MP GOTO 2100 : REM out of bounds check
 2070 FOR J = K TO MP STEP P : REM the sieve itself
-2080 IF S(J) <> 0 THEN LP = LP - 1 : S(J) = 0
+2080 IF S(J) <> 0 THEN LP = LP - 1 : S(J) = 0 : REM decrement LP when potential primes removed
 2090 NEXT J : REM end of the sieve
 2100 NEXT P : REM continue iterating through the sieve
-2105 DIM PR(LP-1)
-2110 CP = 0 : REM count primes (LP)
+2110 CP = 0 : DIM PR(LP-1) : REM prime list PR(), count primes (CP)
 2120 FOR I = 2 TO MP : REM loop through sieve to create array of primes
 2130 IF S(I) THEN PR(CP) = I : CP = CP + 1 : IF CP >= LP THEN GOTO 2150
 2140 NEXT I
