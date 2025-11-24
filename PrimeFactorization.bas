@@ -22,6 +22,7 @@
 141 REM note: VAL(IN$) will return 0 for a non-numeric string
 150 IF N = 1 THEN PRINT "1 is neither prime nor composite." : GOSUB 5600 : GOTO 90 : REM pause
 160 GOSUB 1000 : REM GetFactors(N) -> AF(), LF
+165 REM PRINT "Primes ("; LP; "): "; : FOR I = 0 TO LP - 1 : PRINT PR(I); " "; : NEXT I : PRINT : REM debugging
 170 IF LF = 1 THEN PRINT N; " IS PRIME!" : GOSUB 5600 : GOTO 50 : REM pause
 180 PRINT N; " = "; AF(0);
 190 FOR I = 1 TO LF-1 : PRINT " * "; AF(I); : NEXT I : PRINT
@@ -50,7 +51,7 @@
 2000 REM GetPrimes(MP) -> PR(MP), LP
 2001 REM calculates prime numbers up to MP using the Sieve of Eratosthenes
 2002 REM returns array PR of prime numbers, length of array LP
-2010 DIM S(MP), PR(MP) : REM boolean sieve S(), and prime list PR()
+2010 DIM S(MP) : LP = MP - 1 : REM boolean sieve S(), and prime list PR()
 2020 FOR I = 0 TO MP : S(I) = -1 : NEXT I  : REM -1 TRUE (I is prime), 0 FALSE (I is composite)
 2030 S(0) = 0 : S(1) = 0 : REM 0 and 1 are never prime
 2035 LMT = FN ISQR(MP) : REM sieve only needs to go through the square root of MP
@@ -58,12 +59,13 @@
 2050 IF S(P) = 0 GOTO 2100 : REM skip numbers already removed
 2062 K = P*P : IF K > MP GOTO 2100 : REM out of bounds check
 2070 FOR J = K TO MP STEP P : REM the sieve itself
-2080 S(J) = 0
+2080 IF S(J) <> 0 THEN LP = LP - 1 : S(J) = 0
 2090 NEXT J : REM end of the sieve
 2100 NEXT P : REM continue iterating through the sieve
-2110 LP = 0 : REM count primes (LP)
+2105 DIM PR(LP)
+2110 CP = 0 : REM count primes (LP)
 2120 FOR I = 2 TO MP : REM loop through sieve to create array of primes
-2130 IF S(I) THEN PR(LP) = I : LP = LP + 1
+2130 IF S(I) THEN PR(CP) = I : CP = CP + 1 : IF CP >= LP THEN GOTO 2150
 2140 NEXT I
 2150 RETURN : REM GetPrimes
 
